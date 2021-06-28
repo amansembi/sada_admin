@@ -1,0 +1,123 @@
+<?php 
+include "ind/database.php";
+$id=$_SESSION['b_id'];
+$run=mysqli_query($con,"select * from `bill` where bid='$id'");
+if($run)
+{
+$res=mysqli_fetch_array($run);
+?>
+
+<html>
+<head>
+<style>
+.con{
+  position: static;
+    max-width: 900px;
+    padding: 0px 15px;
+    margin: 0 auto;
+}
+table, td, th {  
+  border: 1px solid #ddd;
+
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 15px;
+}
+
+.forment_right{
+  text-align:right;
+}
+.forment_left{
+  text-align:left;
+}
+.forment_center{
+  text-align:center;
+}
+</style>
+
+</head>
+
+
+<body>
+<div class="con">
+<table>
+<tr>
+<td><img class="logo" src="assets/media/image/logo-dark.png" alt="logo"></td>
+<td class="forment_right">
+<h4>Name : Deep bara</h4>
+<h4>Mobil : 9876611697</h4>
+<h4>Address : Near Pear Darghah,Mandi Dabwali</h4>
+</td>
+</tr>
+</table>
+
+
+<table>
+<tr>
+<td class="forment_left">GST : 21A458WE12</td>
+<td class="forment_center">TEX INVOICE</td>
+<td class="forment_right"> <?php echo $res['date'];?></td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td class="forment_center">Customer Detail</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td>Recpit No. : 20/-</td>
+<td>M/S : <?php echo $res['p_name'];?></td>
+<td>Mobile: <?php echo $res['mobile'];?></td>
+<td>GST : <?php echo $res['gst'];?></td>
+<td>Address : <?php echo $res['address'];?></td>
+</tr>
+</table>
+<?php    
+$q ="select * from `bill` where bid='$id'";
+$res = mysqli_query($con,$q);
+?>
+<table>
+<tr>
+<th>Sr. No</th>
+<th>Name Of Prodect </th>
+<th>Qty</th>
+<th>Rate</th>
+<th>Original Amount </th>
+
+<th>Gst%</th>
+<th> Gst Amount</th>
+<th>Total</th>
+</tr>
+
+<tr>
+
+<?php while($row=mysqli_fetch_assoc($res))
+$q = $res['type'];
+$r = $res['amount'];
+$a = $q*$r;
+{?>
+<td>1.</td>
+<td><?php echo $res['type'];?></td>
+<td><?php echo $res['quantity'];?></td>
+<td><?php echo $res['amount'];?></td>
+<td>1500</td>
+<td>18%</td>
+<td>120</td>
+<td>1280</td>
+<?php }?>
+</tr>
+</table>
+
+
+</div>
+</body>
+</html>
